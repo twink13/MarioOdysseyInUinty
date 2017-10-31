@@ -2,7 +2,7 @@
 Some effect form Mario Odyssey, implement with Unity.
 
 # Fade
-![](http://wx4.sinaimg.cn/mw1024/7273a165ly1fkyai6xbl7g20e80e87a7.gif)
+![](http://wx3.sinaimg.cn/mw1024/7273a165ly1fkyaiga3rmg20e80e84qw.gif)
 ![](http://wx4.sinaimg.cn/mw1024/7273a165ly1fkyai6xbl7g20e80e87a7.gif)
 
 # Fog
