@@ -7,6 +7,8 @@
 		_Radius("Radius", Range(0, 0.5)) = 0.4
 		_HalfWidth("HalfWidth", Range(0.05, 0.25)) = 0.1
 		_TimeValue("TimeValue", Range(0, 1)) = 0
+		_Scale("Scale", Range(0, 1)) = 1
+			_LightScale("_LightScale", Float) = 1
 	}
 	SubShader
 	{
@@ -41,14 +43,17 @@
 			float4 _MainTex_ST;
 			fixed4 _Color;
 			float _Radius;
+			float _Scale;
 			float _HalfWidth;
 			float _TimeValue;
 			float _LightScale;
+			float _OffsetH;
 			float3 _SpeedDir;
 			
 			v2f vert (appdata v)
 			{
 				v2f o;
+				v.vertex.x += _OffsetH * min(1, _TimeValue) * _LightScale;
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 				return o;
@@ -62,10 +67,10 @@
 				height = max(0, height - _TimeValue);
 
 				float2 currentDir = i.uv - center;
-				float dirScale = dot(currentDir, _SpeedDir.xz) / max(0.01, dist);
-				dirScale = max(0, dirScale + 0.7);
+				float dirScale = dot(currentDir, float2(0, 1)) / max(0.01, dist);
+				dirScale = max(0, dirScale + 0);
 
-				return _Color * height * _LightScale * dirScale;
+				return _Color * height * _LightScale * dirScale * _Scale;
 			}
 			ENDCG
 		}
