@@ -15,20 +15,21 @@ public class CreateFog : MonoBehaviour {
     public RenderTexture m_HeightmapTemp;
 
     // Use this for initialization
-    void Start () {
-        m_Mesh = GetComponent<MeshFilter>().sharedMesh;
-        m_Mesh.Clear();
+    void Start ()
+	{
+		m_Mesh = new Mesh();
+		m_Mesh.name = "CloudMesh";
+		GetComponent<MeshFilter>().sharedMesh = m_Mesh;
+		//GetComponent<MeshCollider>().sharedMesh = m_Mesh;
 
-        CreateMesh();
+		CreateMesh();
         CreateRt();
-
-
-        // set collider box size
-        //GetComponent<BoxCollider>().size = new Vector3(m_Size - 1, 1, m_Size - 1);
 
         // set heightmap
         GetComponent<Renderer>().sharedMaterial.SetTexture("_MainTex", m_Heightmap);
-    }
+
+		gameObject.AddComponent<MeshCollider>().sharedMesh = m_Mesh;
+	}
 
     // Update is called once per frame
     void Update()
@@ -41,8 +42,8 @@ public class CreateFog : MonoBehaviour {
             RaycastHit hit;
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             if (Physics.Raycast(ray, out hit))
-            {
-                m_HeightHitMaterial.SetVector("_HitPos", hit.textureCoord);
+			{
+				m_HeightHitMaterial.SetVector("_HitPos", hit.textureCoord);
 
                 Graphics.Blit(m_Heightmap, m_HeightmapTemp);
                 Graphics.Blit(m_HeightmapTemp, m_Heightmap, m_HeightHitMaterial);
@@ -91,11 +92,11 @@ public class CreateFog : MonoBehaviour {
             }
         }
 
-        m_Mesh.vertices = verts;
+		m_Mesh.vertices = verts;
         m_Mesh.normals = normals;
         m_Mesh.triangles = triangles;
         m_Mesh.uv = uvs;
-    }
+	}
 
     void CreateRt()
     {

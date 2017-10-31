@@ -106,16 +106,8 @@
 				float3 cross2 = cross(rightPos - centerPos, downPos - centerPos);
 				float3 normal = normalize(cross1 + cross2);
 
-				float3 average;
-				average.x = down - up;
-				average.z = left - right;
-				average.y = 0;
-				//float3 normal = normalize(average);
-
 				fixed diff = dot(normal, _WorldSpaceLightPos0.xyz) * 0.5 + 0.5;
 
-				// sample the texture
-				fixed4 col = tex2D(_MainTex, i.uv.xy);
 				return diff;
 			}
 			ENDCG

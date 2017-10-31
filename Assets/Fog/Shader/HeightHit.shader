@@ -49,7 +49,6 @@
 			{
 				fixed4 col = tex2D(_MainTex, i.uv);
 				float dist = distance(i.uv, _HitPos) / _Size;
-				//dist = min(dist, 1);
 				dist = saturate(1 - dist * dist);
 				return col - dist * _Speed * 0.1;
 			}
