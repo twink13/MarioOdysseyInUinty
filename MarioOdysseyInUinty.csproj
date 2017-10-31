@@ -85,12 +85,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Fog\Script\CreateFog.cs" />
+    <Compile Include="Assets\Wave\Script\Agent.cs" />
+    <Compile Include="Assets\Wave\Script\AutoDestroy.cs" />
+    <Compile Include="Assets\Wave\Script\Wave.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Fade\Shader\SimpleColor.shader" />
     <None Include="Assets\Fog\Shader\FogShow.shader" />
     <None Include="Assets\Fog\Shader\HeightHit.shader" />
     <None Include="Assets\Fog\Shader\HeightRecover.shader" />
+    <None Include="Assets\Wave\Shader\SingleWave.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
