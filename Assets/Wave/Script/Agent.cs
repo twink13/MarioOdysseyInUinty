@@ -39,10 +39,10 @@ public class Agent : MonoBehaviour {
         Material mat = go.GetComponent<Renderer>().material;
 
         distance = distance > m_MaxSpeed ? m_MaxSpeed : distance;
-        float lightScale = distance / m_MaxSpeed;
+        float speedScale = distance / m_MaxSpeed;
 
 
-        mat.SetFloat("_LightScale", lightScale);
+        mat.SetFloat("_SpeedScale", speedScale);
         mat.SetVector("_SpeedDir", dir);
         mat.SetFloat("_OffsetH", offsetH);
     }

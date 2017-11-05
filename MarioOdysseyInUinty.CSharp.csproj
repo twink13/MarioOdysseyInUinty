@@ -88,6 +88,7 @@
     <None Include="Assets\Fog\Shader\FogShow.shader" />
     <None Include="Assets\Fog\Shader\HeightHit.shader" />
     <None Include="Assets\Fog\Shader\HeightRecover.shader" />
+    <None Include="Assets\Wave\Shader\DoubleWave.shader" />
     <None Include="Assets\Wave\Shader\SingleWave.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />

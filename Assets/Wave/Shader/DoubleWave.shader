@@ -1,14 +1,15 @@
-﻿Shader "Unlit/SingleWave"
+﻿Shader "Unlit/DoubleWave"
 {
 	Properties
 	{
 		_MainTex ("Texture", 2D) = "white" {}
 		_Color("Color", Color) = (0, 0, 0, 1)
 		_Radius("Radius", Range(0, 0.5)) = 0.4
+		_RadiusMax("RadiusMax", Range(0, 0.5)) = 0.25
 		_HalfWidth("HalfWidth", Range(0.05, 0.25)) = 0.1
 		_TimeValue("TimeValue", Range(0, 1)) = 0
 		_Scale("Scale", Range(0, 1)) = 1
-		_SpeedScale("_SpeedScale", Float) = 1
+			_SpeedScale("_SpeedScale", Float) = 1
 	}
 	SubShader
 	{
@@ -43,6 +44,7 @@
 			float4 _MainTex_ST;
 			fixed4 _Color;
 			float _Radius;
+			float _RadiusMax;
 			float _Scale;
 			float _HalfWidth;
 			float _TimeValue;
@@ -53,7 +55,6 @@
 			v2f vert (appdata v)
 			{
 				v2f o;
-				v.vertex.x += _OffsetH * min(1, _TimeValue) * _SpeedScale;
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 				return o;
@@ -61,6 +62,8 @@
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
+				_Radius = min(_Radius, _RadiusMax);
+
 				float2 center = float2(0.5, 0.5);
 				float dist = distance(center, i.uv);
 				float height =  1 - min(1, abs(dist - _Radius) / _HalfWidth);
@@ -72,8 +75,8 @@
 
 				float finalScale = 1;
 				finalScale *= height;
-				finalScale *= _SpeedScale;
-				finalScale *= dirScale;
+				//finalScale *= _SpeedScale;
+				//finalScale *= dirScale;
 				finalScale *= _Scale;
 
 				return _Color * finalScale;
